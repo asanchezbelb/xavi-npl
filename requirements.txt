@@ -7,6 +7,13 @@ nltk
 thinc
 python-dotenv
 spacy==3.4.4
+transformers
+evaluate
+tensorflow==2.12.0
+torch 
+torchvision 
+torchaudio
+sentencepiece
 
 # C:\Users\asanchezbelb\Anaconda3\Scripts\activate hola
 
