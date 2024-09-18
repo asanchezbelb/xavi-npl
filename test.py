@@ -1,112 +1,22 @@
-# import snowflake.snowpark as snowpark
-# def main(session: snowpark.Session):
-#     # Configura el warehouse
-#     session.sql("USE WAREHOUSE WH_MOD_DDP_DOCENCIA").collect()
-    
-#     # Define la consulta SQL
-#     sql_query = """
-#     SELECT 
-#         * 
-#     FROM 
-#         DB_UOC_PROD.DDP_DOCENCIA.STAGE_ENQUESTES 
-#     WHERE ENQUESTA_ID IN (668, 670)
-#     AND TIPUS_PREGUNTA = 'PREGUNTA_OBERTA'
-#     LIMIT 10;
-#     """
-    
-#     # Ejecuta la consulta
-#     df = session.sql(sql_query)
-    
-#     try:
-#         # Recoge los resultados
-#         result = df.collect()
-#         for row in result:
-#             # Limpia y muestra cada fila
-#             clean_row = str(row).encode('ascii', errors='ignore').decode('ascii')
-#             print(clean_row)
-#     except UnicodeEncodeError as e:
-#         print(f"Error de codificación: {e}")
-#     except Exception as e:
-#         print(f"Error inesperado: {e}")
-    
-#     return df
 
-
-
-from snowflake.snowpark import Session
-from snowflake.snowpark.exceptions import SnowparkGeneralException
-import pandas as pd
-
-# # Configura las credenciales de Snowflake
-# snowflake_user = 'enietoo@uoc.edu'
-# snowflake_password = 'xxxxxxx'
-# snowflake_account = 'uocbi.eu-west-1'
-# snowflake_warehouse = 'WH_DD_DMELINC'
-# snowflake_role = 'R_DD_DMELINC'
-# snowflake_database = 'DB_UOC_PROD'
-# snowflake_schema = 'DD_DMELINC'
-# snowflake_table = 'TU_TABLA'
-
-# # Crea una sesión Snowpark
-# session = {
-#     "account": "uocbi.eu-west-1",
-#     "user": "enietoo@uoc.edu",
-#     "role": "R_DDP_LMS_TRAN_ELINC",  # optional
-#     "warehouse": "WH_DDP_LMS_TRAN_ELINC",  # optional
-#     "database": "DB_UOC_PROD",  # optional
-#     "schema": "DDP_LMS_TRAN_ELINC",
-#     "authenticator":"externalbrowser"}
-
-# df = pd.DataFrame()
-# #try:
-# session_DataPortal = Session.builder.configs(session).create()
-
-# print(session_DataPortal.get_current_database())
-# print(session_DataPortal.get_current_schema())
-# print(session_DataPortal.SessionBuilder)
-
-# Configura las credenciales de Snowflake
-# snowflake_user = 'enietoo@uoc.edu'
-# snowflake_password = 'xxxxxxx'
-# snowflake_account = 'uocbi.eu-west-1'
-# snowflake_warehouse = 'WH_DD_DMELINC'
-# snowflake_role = 'R_DD_DMELINC'
-# snowflake_database = 'DB_UOC_PROD'
-# snowflake_schema = 'DD_DMELINC'
-# snowflake_table = 'TU_TABLA'
-
-# # Crea una sesión Snowpark
-# session = {
-#     "account": "uocbi.eu-west-1",
-#     "user": "asanchezbelb@uoc.edu",
-#     "role": "R_DDP_DOCENCIA",  # optional
-#     "warehouse": "WH_DDP_LMS_TRAN_ELINC",  # optional
-#     "database": "DB_UOC_PROD",  # optional
-#     "schema": "DDP_LMS_TRAN_ELINC",
-#     "authenticator":"externalbrowser"}
-
-# df = pd.DataFrame()
-# #try:
-# session_DataPortal = Session.builder.configs(session).create()
-
-# print(session_DataPortal.get_current_database())
-# print(session_DataPortal.get_current_schema())
-# print(session_DataPortal.SessionBuilder)
 
 
 import snowflake.snowpark as snowpark
 import csv
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Credenciales de Snowflake
-snowflake_user = 'asanchezbelb@uoc.edu'
-snowflake_password = 'xxxxxxx'
-snowflake_account = 'uocbi.eu-west-1'
-snowflake_warehouse = 'WH_MOD_DDP_DOCENCIA'
-snowflake_role = 'R_DDP_DOCENCIA'
-snowflake_database = 'DB_UOC_PROD'
-snowflake_schema = 'DDP_DOCENCIA'
-snowflake_table = 'STAGE_ENQUESTES'
+snowflake_user = os.getenv('SNOWFLAKE_USER')
+snowflake_password = os.getenv('SNOWFLAKE_PASSWORD')
+snowflake_account = os.getenv('SNOWFLAKE_ACCOUNT')
+snowflake_warehouse = os.getenv('SNOWFLAKE_WAREHOUSE')
+snowflake_role = os.getenv('SNOWFLAKE_ROLE')
+snowflake_database = os.getenv('SNOWFLAKE_DATABASE')
+snowflake_schema = os.getenv('SNOWFLAKE_SCHEMA')
+snowflake_table = os.getenv('SNOWFLAKE_TABLE')
 
 # Configuración de sesión Snowflake
 session_params = {

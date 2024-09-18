@@ -1,2 +1,17 @@
 snowflake-snowpark-python
 pandas
+numpy
+scikit-learn
+matplotlib
+nltk
+thinc
+python-dotenv
+spacy==3.4.4
+
+# C:\Users\asanchezbelb\Anaconda3\Scripts\activate hola
+
+# pip install --upgrade pip setuptools
+
+# python -m spacy download es_core_news_sm  # Español
+# python -m spacy download en_core_web_sm  # Inglés
+# python -m spacy download ca_core_news_sm  # Catalán
